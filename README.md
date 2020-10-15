@@ -4,3 +4,5 @@ Flexible Regression Test builder GUI Application for the Fall2020 Rowan Software
 AFMS Sponsor: Daniel Dusharm
 
 Project Owner: William Amaechi
+
+Design Team Member: Alex Caruso
