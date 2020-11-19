@@ -28,6 +28,9 @@ public class FlexRegBuilder extends JFrame implements ActionListener {
 	static JTable rightTable;
 	static DefaultTableModel rightModel;
 	static DefaultTableModel leftModel; 
+	// stores all beans for each entry on table (starting size is 10)
+        // index for each bean maps to their respective table index
+        static ArrayList<BeanBuilder> beans = new ArrayList<BeanBuilder>(10); 
 
 	FlexRegBuilder() {}																		// Constructor
 
