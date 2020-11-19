@@ -24,7 +24,9 @@ public class ButtonActions {
         and create the XML file in an existing folder.
         The value returned is the status,
         or whatever the file was successfully
-        created or not. */
+        created or not.
+        @author  Emily Griscom
+        @version 11/19/2020  */
     public static int createXML(String dirStr){  
         // convert argument into a file
         File dirFile = new File(dirStr);
