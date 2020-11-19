@@ -29,7 +29,7 @@ public class PopUp extends JFrame implements ActionListener {
 	static JOptionPane multiply;
 	static JEditorPane editor;
 	
-	PopUp() {}																									// Constructor
+	PopUp() {}																							// Constructor
 
 	/**
 	 * The creation of the pop-up window
@@ -40,7 +40,7 @@ public class PopUp extends JFrame implements ActionListener {
 	public static void popUp(String filePath) throws IOException {
 		
 		path = filePath;
-		PopUp p1 = new PopUp();																					// Make an object of the class PopUp
+		PopUp p1 = new PopUp();																			// Make an object of the class PopUp
 		
 		// = = = = = = Frame = = = = = =
 		frame = new JFrame("Test Sequence Builder"); 													// Frame to contains pop-up elements
@@ -50,10 +50,10 @@ public class PopUp extends JFrame implements ActionListener {
 		frame.setLayout(null);
 		
 		// = = = = = = Labels = = = = = =
-		errorLabel = new JLabel("Error: File not found");
+		/*errorLabel = new JLabel("Error: File not found");
 		errorLabel.setFont(new Font("MV Boli", Font.BOLD, 16));
 		errorLabel.setForeground(Color.RED);
-		errorLabel.setVisible(false);
+		errorLabel.setVisible(false);*/
 		
 		saveLabel = new JLabel("File Saved");
 		saveLabel.setFont(new Font("MV Boli", Font.BOLD, 12));
@@ -63,12 +63,6 @@ public class PopUp extends JFrame implements ActionListener {
 		// = = = = = = Buttons = = = = = =
 		JButton saveBtn = new JButton("Save");
 		saveBtn.addActionListener(p1);
-		
-		JButton multiBtn = new JButton("Multiplication");
-		multiBtn.addActionListener(p1);
-
-		JButton addressBtn = new JButton("Address Book");
-		addressBtn.addActionListener(p1);
 		
 		// = = = = = = Edit file panel = = = = = =
 		TitledBorder border = BorderFactory.createTitledBorder("Editing area");
@@ -83,23 +77,11 @@ public class PopUp extends JFrame implements ActionListener {
 		editorScroller.setBorder(border);
 		
 		// = = = = = = Other Panels = = = = = =
-		JPanel errorPanel = new JPanel(); 																			// Panel for error label 
+		/*JPanel errorPanel = new JPanel(); 																			// Panel for error label 
 		errorPanel.setBounds(365, 550, 325, 25);
 		errorPanel.setLayout(new BorderLayout());
 		errorPanel.setBackground(new Color(44,87,70));
-		errorPanel.add(errorLabel);
-		
-		JPanel addressPanel = new JPanel();
-		addressPanel.setBounds(295, 485, 125, 30);
-		addressPanel.setLayout(new BorderLayout());
-		addressPanel.setBackground(new Color(44,87,70));
-		addressPanel.add(addressBtn);
-		
-		JPanel multiPanel = new JPanel();
-		multiPanel.setBounds(160, 485, 125, 30);
-		multiPanel.setLayout(new BorderLayout());
-		multiPanel.setBackground(new Color(44,87,70));
-		multiPanel.add(multiBtn);
+		errorPanel.add(errorLabel);*/
 		
 		JPanel saveLblPanel = new JPanel();
 		saveLblPanel.setBounds(70, 515, 65, 20);
@@ -121,17 +103,20 @@ public class PopUp extends JFrame implements ActionListener {
 			text.read(inputReader, filePath); 
 			
 		} catch(IOException e) {
-			errorLabel.setVisible(true);
+			FlexRegBuilder.errorLabel.setText("Error: Failed to open edit");
+			FlexRegBuilder.errorLabel.setVisible(true);
 		}
 		
-		inputReader.close();
+		if(inputReader != null) {
+			inputReader.close();
+		}
 			
 		// = = = = = = = = = = = = =
-		frame.add(saveLblPanel);
-		frame.add(errorPanel);
+		//frame.add(saveLblPanel);
+		//frame.add(errorPanel);
 		//frame.add(addressPanel);
 		//frame.add(multiPanel);
-		frame.add(savePanel);
+		//frame.add(savePanel);
 		frame.add(editorScroller);
 		frame.setVisible(true);
 	}
@@ -139,7 +124,7 @@ public class PopUp extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		String com = event.getActionCommand();
+		/*String com = event.getActionCommand();
 		if (com.contentEquals("Save")) {																			// If user presses saves file
 			JTextComponent text = editor;
 			FileWriter writer = null; 
@@ -161,21 +146,7 @@ public class PopUp extends JFrame implements ActionListener {
 			} catch (IOException e) {
 				errorLabel.setText("Error: Save failed");
 				errorLabel.setVisible(true);
-			}			
-			
-		} /*else if(com.contentEquals("Multiplication")) {
-			String left = JOptionPane.showInputDialog("Left Input: ");
-			String right = JOptionPane.showInputDialog("Right Input: ");
-			String exp = JOptionPane.showInputDialog("Expected Result: ");
-			
-			int leftIn = Integer.parseInt(left);
-			int rightIn = Integer.parseInt(right);
-			int expResult = Integer.parseInt(exp);
-			
-			BeanBuilder temp = new BeanBuilder(leftIn, rightIn, expResult);
-			JOptionPane.showInternalMessageDialog(frame.getContentPane(), temp.toString() + "\n" + temp.assertEqual());
-			// Assert equals is boolean, tells if two are equal.
-			
+			}				
 		}*/
 	}
 }
