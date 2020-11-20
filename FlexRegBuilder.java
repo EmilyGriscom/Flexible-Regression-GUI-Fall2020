@@ -313,21 +313,18 @@ public class FlexRegBuilder extends JFrame implements ActionListener {
                  int tmp = folder.showOpenDialog(null);																// Invoke to show the save dialog
                  if (tmp == JFileChooser.APPROVE_OPTION) {
                      File filesList[] = folder.getSelectedFile().listFiles();
+                     errorLabel.setVisible(false); // no errors by default
                      for(File file : filesList) { 																	// insert every .xml file to left table
                          String filepath = file.toString();
                          if(ButtonActions.isXML(filepath)) {
-                             System.out.println(filepath);
                              leftModel.insertRow(leftModel.getRowCount(), new Object[] { filepath });
-                        	 errorLabel.setVisible(false);
-                             
-                         } else {
-                        	 errorLabel.setText("Error: Some files not .xml files");
+                         } else { // do not add non .xml files, give a warning
+                        	 errorLabel.setText("Warning: Some files not .xml files");
                         	 errorLabel.setVisible(true);
                          }
                      }
                  }
-             }
-             
+             }  
              // otherwise, user picked "Nevermind," do nothing	
 			
 		} else if(com.contentEquals("Remove")) {
@@ -409,7 +406,10 @@ public class FlexRegBuilder extends JFrame implements ActionListener {
                 	if(ButtonActions.isBlank(fileName)) {
                         errorLabel.setText("Error: Blank filename");
                         errorLabel.setVisible(true);
-                    } else {    
+                    } else if(ButtonActions.exists(folderName + "//" + fileName + ".xml")) {   
+                        errorLabel.setText("Error: File already exists");
+                        errorLabel.setVisible(true);
+                    } else { // no errors, create file
                         try {
                             File newFile = new File(folderName + "//" + fileName + ".xml");
                             newFile.createNewFile();
